@@ -45,19 +45,19 @@ public class XiaoLong {
             if (input.equalsIgnoreCase("bye")) {
                 System.out.println("Goodbye! Nice meeting you, so long from XiaoLong");
                 break;
-            }else if (input.equalsIgnoreCase("list")) {
+            } else if (input.equalsIgnoreCase("list")) {
                 displayTasks();
-            }else if (input.startsWith("mark")) {
+            } else if (input.startsWith("mark")) {
                 handleMarkCommand(input);
-            }else if (input.startsWith("unmark")) {
+            } else if (input.startsWith("unmark")) {
                 handleUnmarkCommand(input);
-            }else if (input.startsWith("todo")) {
+            } else if (input.startsWith("todo")) {
                 handleToDoCommand(input);
-            }else if (input.startsWith("deadline")) {
+            } else if (input.startsWith("deadline")) {
                 handleDeadlineCommand(input);
-            }else if (input.startsWith("event")) {
+            } else if (input.startsWith("event")) {
                 handleEventCommand(input);
-            }else {
+            } else {
                 System.out.println("Invalid command! Try 'todo', 'deadline', 'event', 'list', 'mark', or 'unmark'.");
             }
         }
@@ -71,7 +71,7 @@ public class XiaoLong {
     private void displayTasks() {
         if (taskCount == 0) {
             System.out.println("List is empty. Add a task using 'todo', 'deadline', or 'event'.");
-        }else {
+        } else {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < taskCount; i++) {
                 System.out.println((i + 1) + ". " + tasks[i]);
@@ -88,7 +88,7 @@ public class XiaoLong {
             if (taskNumber >= 1 && taskNumber <= taskCount) {
                 tasks[taskNumber - 1].markAsDone();
                 System.out.println("Nice! I've marked this task as done:\n" + tasks[taskNumber - 1]);
-            }else {
+            } else {
                 System.out.println("Invalid task number.");
             }
         } catch (Exception e) {
@@ -105,7 +105,7 @@ public class XiaoLong {
             if (taskNumber >= 1 && taskNumber <= taskCount) {
                 tasks[taskNumber - 1].markAsNotDone();
                 System.out.println("OK, I've marked this task as not done yet:\n" + tasks[taskNumber - 1]);
-            }else {
+            } else {
                 System.out.println("Invalid task number.");
             }
         } catch (Exception e) {
