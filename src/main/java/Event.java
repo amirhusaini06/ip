@@ -1,18 +1,40 @@
 /**
- * Represents an Event task with a start and end time.
+ * Represents an Event task.
  */
 public class Event extends Task {
-    protected String from;
-    protected String to;
+    protected String at;
 
-    public Event(String description, String from, String to) {
+    /**
+     * Constructs an Event task.
+     *
+     * @param description Description of the event.
+     * @param at Event date/time.
+     */
+    public Event(String description, String at) {
         super(description);
-        this.from = from;
-        this.to = to;
+        this.at = at;
+    }
+
+    /**
+     * Constructs an Event task with a completion status.
+     * Used when loading from a file.
+     *
+     * @param description Description of the event.
+     * @param at Event date/time.
+     * @param isDone Whether the task is completed.
+     */
+    public Event(String description, String at, boolean isDone) {
+        super(description, isDone);
+        this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+
+    @Override
+    public String toFileFormat() {
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + at;
     }
 }
