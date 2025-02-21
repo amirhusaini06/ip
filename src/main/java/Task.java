@@ -2,8 +2,8 @@
  * Represents a task with a description and completion status.
  */
 public class Task {
-    private String description;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
     /**
      * Constructs a Task with the specified description.
@@ -13,6 +13,18 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    /**
+     * Constructs a Task with a description and completion status.
+     * Used when loading from a file.
+     *
+     * @param description The task description.
+     * @param isDone Whether the task is completed.
+     */
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     /**
@@ -46,5 +58,38 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    /**
+     * Converts the task to a savable file format.
+     * @return String representation of the task.
+     */
+    public String toFileFormat() {
+        return (this instanceof ToDo ? "T" :
+                (this instanceof Deadline ? "D" : "E")) + " | " +
+                (isDone ? "1" : "0") + " | " + description;
+    }
+
+    /**
+     * Creates a Task object from a formatted file line.
+     * @param line A line from the save file.
+     * @return A Task object.
+     */
+    public static Task fromFileFormat(String line) {
+        String[] parts = line.split(" \\| ");
+        String type = parts[0];
+        boolean isDone = parts[1].equals("1");
+        String description = parts[2];
+
+        switch (type) {
+            case "T":
+                return new ToDo(description, isDone);
+            case "D":
+                return new Deadline(description, parts[3], isDone);
+            case "E":
+                return new Event(description, parts[3], isDone);
+            default:
+                throw new IllegalArgumentException("Invalid task type in file: " + type);
+        }
     }
 }
