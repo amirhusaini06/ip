@@ -6,16 +6,6 @@ import java.util.Scanner;
  * A chatbot program that tracks different types of tasks.
  */
 public class XiaoLong {
-    private static final String DESIGN =
-            " ___    ___ ___  ________  ________  ___       ________  ________   ________     \n" +
-                    "|\\  \\  /  /|\\  \\|\\   __  \\|\\   __  \\|\\  \\     |\\   __  \\|\\   ___  \\|\\   ____\\    \n" +
-                    "\\ \\  \\/  / | \\  \\ \\  \\|\\  \\ \\  \\|\\  \\ \\  \\    \\ \\  \\|\\  \\ \\  \\\\ \\  \\ \\  \\___|    \n" +
-                    " \\ \\    / / \\ \\  \\ \\   __  \\ \\  \\\\  \\ \\  \\    \\ \\  \\\\  \\ \\  \\\\ \\  \\ \\  \\  ___  \n" +
-                    "  /     \\/   \\ \\  \\ \\  \\ \\  \\ \\  \\\\  \\ \\  \\____\\ \\  \\\\  \\ \\  \\\\ \\  \\ \\  \\|\\  \\ \n" +
-                    " /  /\\   \\    \\ \\__\\ \\__\\ \\__\\ \\_______\\ \\_______\\ \\_______\\ \\__\\\\ \\__\\ \\_______\\\n" +
-                    "/__/ /\\ __\\    \\|__|\\|__|\\|__|\\|_______|\\|_______|\\|_______|\\|__| \\|__|\\|_______|\n" +
-                    "|__|/ \\|__|                                                                       ";
-
     private static final String FILE_PATH = "./data/xiaolong.txt";
     private ArrayList<Task> tasks;
 
@@ -31,7 +21,6 @@ public class XiaoLong {
      * Starts the XiaoLong chatbot.
      */
     public void start() {
-        System.out.println(DESIGN);
         System.out.println("Welcome to XiaoLong chatbot!");
         System.out.println("Type 'todo', 'deadline', 'event', 'delete', 'list', or 'bye'.");
 
@@ -66,6 +55,9 @@ public class XiaoLong {
         scanner.close();
     }
 
+    /**
+     * Displays the list of tasks.
+     */
     private void displayTasks() {
         if (tasks.isEmpty()) {
             System.out.println("List is empty. Add a task using 'todo', 'deadline', or 'event'.");
@@ -77,6 +69,9 @@ public class XiaoLong {
         }
     }
 
+    /**
+     * Handles marking a task as done.
+     */
     private void handleMarkCommand(String input) {
         try {
             int taskNumber = Integer.parseInt(input.split(" ")[1]) - 1;
@@ -88,6 +83,9 @@ public class XiaoLong {
         }
     }
 
+    /**
+     * Handles unmarking a task as not done.
+     */
     private void handleUnmarkCommand(String input) {
         try {
             int taskNumber = Integer.parseInt(input.split(" ")[1]) - 1;
@@ -99,6 +97,9 @@ public class XiaoLong {
         }
     }
 
+    /**
+     * Handles adding a ToDo task.
+     */
     private void handleToDoCommand(String input) {
         try {
             String description = input.substring(5).trim();
@@ -110,6 +111,9 @@ public class XiaoLong {
         }
     }
 
+    /**
+     * Handles adding a Deadline task.
+     */
     private void handleDeadlineCommand(String input) {
         try {
             String[] parts = input.substring(9).split(" /by ");
@@ -121,13 +125,13 @@ public class XiaoLong {
         }
     }
 
+    /**
+     * Handles adding an Event task.
+     */
     private void handleEventCommand(String input) {
         try {
             String[] parts = input.substring(6).split(" /from | /to ");
-            if (parts.length < 3) {
-                throw new IllegalArgumentException();
-            }
-            tasks.add(new Event(parts[0], parts[1], false));
+            tasks.add(new Event(parts[0], parts[1], parts[2]));
             saveTasksToFile();
             System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size() - 1));
         } catch (Exception e) {
@@ -135,6 +139,9 @@ public class XiaoLong {
         }
     }
 
+    /**
+     * Handles deleting a task.
+     */
     private void handleDeleteCommand(String input) {
         try {
             int taskNumber = Integer.parseInt(input.split(" ")[1]) - 1;
@@ -147,6 +154,9 @@ public class XiaoLong {
         }
     }
 
+    /**
+     * Saves tasks to file.
+     */
     private void saveTasksToFile() {
         try {
             File file = new File(FILE_PATH);
@@ -163,10 +173,13 @@ public class XiaoLong {
         }
     }
 
+    /**
+     * Loads tasks from file.
+     */
     private void loadTasksFromFile() {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
-            return;
+            return; // No file exists yet, so start with an empty list
         }
 
         try {
