@@ -49,7 +49,14 @@ public class Task {
     public void markAsNotDone() {
         isDone = false;
     }
-
+    /**
+     * Returns the description of the task.
+     *
+     * @return The task description.
+     */
+    public String getDescription() {
+        return description;
+    }
     /**
      * Returns a string representation of the task.
      *

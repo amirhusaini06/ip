@@ -126,4 +126,32 @@ public class Ui {
         System.out.println("Noted. I've removed this task:\n  " + task);
         System.out.println("Now you have " + size + " tasks in the list.");
     }
+    /**
+     * Displays tasks that match a keyword.
+     *
+     * @param tasks The task list to search through.
+     * @param keyword The keyword to search for.
+     */
+    public void showMatchingTasks(TaskList tasks, String keyword) {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Here are the matching tasks in your list:");
+
+        boolean hasMatches = false;
+        int count = 1;
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                System.out.println("     " + count + "." + task);
+                count++;
+                hasMatches = true;
+            }
+        }
+
+        if (!hasMatches) {
+            System.out.println("     No matching tasks found.");
+        }
+
+        System.out.println("    ____________________________________________________________");
+    }
 }
