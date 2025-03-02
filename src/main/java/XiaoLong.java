@@ -123,11 +123,21 @@ public class XiaoLong {
 
     private void handleEventCommand(String input) {
         try {
-            String[] parts = input.substring(6).split(" /from | /to ");
-            if (parts.length < 3) {
+            // Check if input contains the required format
+            if (!input.contains("/from") || !input.contains("/to")) {
                 throw new IllegalArgumentException();
             }
-            tasks.add(new Event(parts[0], parts[1], false));
+
+            // Extract the description (everything between "event " and " /from")
+            String description = input.substring(6, input.indexOf(" /from")).trim();
+
+            // Extract the start time (everything between "/from " and " /to")
+            String startTime = input.substring(input.indexOf("/from ") + 6, input.indexOf(" /to")).trim();
+
+            // Extract the end time (everything after "/to ")
+            String endTime = input.substring(input.indexOf("/to ") + 4).trim();
+
+            tasks.add(new Event(description, startTime, endTime));
             saveTasksToFile();
             System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size() - 1));
         } catch (Exception e) {

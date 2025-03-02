@@ -77,19 +77,33 @@ public class Task {
      */
     public static Task fromFileFormat(String line) {
         String[] parts = line.split(" \\| ");
+        if (parts.length < 3) {
+            return null; // Skip invalid lines
+        }
+
         String type = parts[0];
         boolean isDone = parts[1].equals("1");
         String description = parts[2];
 
-        switch (type) {
-            case "T":
-                return new ToDo(description, isDone);
-            case "D":
-                return new Deadline(description, parts[3], isDone);
-            case "E":
-                return new Event(description, parts[3], isDone);
-            default:
-                throw new IllegalArgumentException("Invalid task type in file: " + type);
+        try {
+            switch (type) {
+                case "T":
+                    return new ToDo(description, isDone);
+                case "D":
+                    if (parts.length > 3) {
+                        return new Deadline(description, parts[3], isDone);
+                    }
+                    return null; // Invalid deadline format
+                case "E":
+                    if (parts.length > 3) {
+                        return new Event(description, parts[3], isDone);
+                    }
+                    return null; // Invalid event format
+                default:
+                    return null; // Skip unknown task types
+            }
+        } catch (Exception e) {
+            return null; // Skip any tasks that cause errors
         }
     }
 }
