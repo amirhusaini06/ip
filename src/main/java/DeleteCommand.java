@@ -1,3 +1,6 @@
+/**
+ * Command to delete a task.
+ */
 
 public class DeleteCommand extends Command {
     private int taskIndex;

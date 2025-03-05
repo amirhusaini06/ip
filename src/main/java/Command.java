@@ -1,3 +1,6 @@
+/**
+ * Abstract class for all commands.
+ */
 
 public abstract class Command {
     /**

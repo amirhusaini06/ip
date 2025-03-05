@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * A chatbot program that tracks different types of tasks.
+ */
 
 public class XiaoLong {
     private static final String FILE_PATH = "./data/xiaolong.txt";
