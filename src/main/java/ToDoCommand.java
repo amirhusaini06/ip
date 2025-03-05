@@ -1,3 +1,6 @@
+/**
+ * Command to add a ToDo task.
+ */
 
 public class ToDoCommand extends Command {
     private String description;

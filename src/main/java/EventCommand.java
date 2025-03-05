@@ -1,3 +1,6 @@
+/**
+ * Command to add an Event task.
+ */
 
 public class EventCommand extends Command {
     private String description;

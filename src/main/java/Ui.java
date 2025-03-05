@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Handles user interface interactions for XiaoLong chatbot.
+ */
 
 public class Ui {
     private static final String DESIGN =

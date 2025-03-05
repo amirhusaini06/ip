@@ -2,6 +2,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles saving and loading tasks from file storage.
+ */
 
 public class Storage {
     private String filePath;

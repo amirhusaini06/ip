@@ -1,3 +1,6 @@
+/**
+ * Command to mark a task as not done.
+ */
 
 public class UnmarkCommand extends Command {
     private int taskIndex;

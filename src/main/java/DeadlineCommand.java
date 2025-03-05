@@ -1,3 +1,6 @@
+/**
+ * Command to add a Deadline task.
+ */
 
 public class DeadlineCommand extends Command {
     private String description;

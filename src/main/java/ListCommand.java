@@ -1,3 +1,6 @@
+/**
+ * Command to list all tasks.
+ */
 
 public class ListCommand extends Command {
     @Override

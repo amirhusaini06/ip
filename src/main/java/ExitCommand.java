@@ -1,3 +1,6 @@
+/**
+ * Command to exit the application.
+ */
 
 public class ExitCommand extends Command {
     @Override
